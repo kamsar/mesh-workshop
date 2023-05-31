@@ -1,0 +1,22 @@
+{
+  "type": "workshop-beta",
+  "displayName": "PokéAPI",
+  "baseLocationUrl": "http://localhost:9000",
+  "locations": {
+    "dataConnectors": [
+      {
+        "type": "pokemon",
+        "displayName": "Pokémon",
+        "dataArchetypes": {
+          "single": {
+            "displayName": "Single Pokémon",
+            "dataEditorUrl": "/"
+          },
+          "default": {
+            "displayName": "PokeAPI HTTP Request"
+          }
+        }
+      }
+    ]
+  }
+}
