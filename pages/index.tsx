@@ -1,4 +1,4 @@
-import { LoadingOverlay } from "@uniformdev/mesh-sdk-react";
+import { DataResourceDynamicInputProvider, InputVariables, LoadingOverlay } from "@uniformdev/mesh-sdk-react";
 import type { NextPage } from "next";
 import { usePokemonList } from "../pokeHelpers/usePokemonList";
 import { PokeSelector } from "../pokeHelpers/PokeSelector";
@@ -20,14 +20,25 @@ const PokemonDataResourceEditor: NextPage = () => {
 
   return (
     // the minHeight works around iframe auto-resizing issues with the react-select component's positioning
-    <VerticalRhythm style={{ minHeight: "250px" }}>
-      <PokeSelector
-        pokemon={data?.results}
-        selectedPokemon={selectedPokemon}
-        setSelectedPokemon={setSelectedPokemon}
-      />
-      <PokeInfo selectedPokemon={currentPokemonDetails} />
-    </VerticalRhythm>
+    <DataResourceDynamicInputProvider>
+      <VerticalRhythm style={{ minHeight: "250px" }}>
+        <InputVariables
+          label="Pokemon Name"
+          onChange={(value) => {
+            setSelectedPokemon({ name: value, url: "" });
+          }}
+          value={selectedPokemon}
+          inputWhenNoVariables={
+            <PokeSelector
+              pokemon={data?.results}
+              selectedPokemon={selectedPokemon}
+              setSelectedPokemon={setSelectedPokemon}
+            />
+          }
+        />
+        <PokeInfo selectedPokemon={currentPokemonDetails} />
+      </VerticalRhythm>
+    </DataResourceDynamicInputProvider>
   );
 };
 
